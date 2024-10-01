@@ -1,0 +1,19 @@
+{
+  "name": "wdio_project_batch6",
+  "type": "module",
+  "devDependencies": {
+    "@types/webdriverio": "^5.0.0",
+    "@wdio/cli": "^9.1.2",
+    "@wdio/local-runner": "^9.1.0",
+    "@wdio/mocha-framework": "^9.1.0",
+    "chromedriver": "^129.0.1",
+    "wdio-chromedriver-service": "^8.1.1",
+    "webdriverio": "^8.39.1"
+  },
+  "scripts": {
+    "test": "npx wdio run wdio.conf.js"
+  },
+  "dependencies": {
+    "mocha": "^10.7.3"
+  }
+}

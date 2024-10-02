@@ -1,4 +1,4 @@
-export default class AddToCartObjects {
+export class AddToCartObjects {
   get nikeShoe() {
     return $("(//span[contains(.,'Nike react phantom run flyknit 2')])[1]");
   }
@@ -27,5 +27,3 @@ export default class AddToCartObjects {
     return $("//span[@class='sale-price']");
   }
 }
-
-// module.exports = new AddToCartObjects();

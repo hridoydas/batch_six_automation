@@ -4,4 +4,3 @@ export class CartObjects {
   }
 }
 
-// module.exports = new CartObjects();

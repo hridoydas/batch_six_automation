@@ -1,7 +1,7 @@
-import searchObjects from "./searchObjects";
-
+import { SearchObjects } from "./searchObjects";
+const searchObjects = new SearchObjects();
 const searchText = "Nike";
-export class SearchActions {
+export default class SearchActions {
   async clickOnSearchIcon() {
     await searchObjects.searchIcon.click();
   }
@@ -20,5 +20,3 @@ export class SearchActions {
     await this.enterSearch();
   }
 }
-
-// module.exports = new SearchActions();

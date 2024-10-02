@@ -1,36 +1,43 @@
-import AddToCartObjects from "./addToCartObjects";
-
-export class AddToCartActions {
+import { AddToCartObjects } from "./addToCartObjects";
+const addToCartObjects = new AddToCartObjects();
+export default class AddToCartActions {
   async selectProduct() {
-    await AddToCartObjects.nikeShoe().click();
+    await addToCartObjects.nikeShoe.click();
   }
 
   async selectSize() {
-    await AddToCartObjects.size.click();
+    await addToCartObjects.size.click();
   }
 
   async selectColor() {
-    await AddToCartObjects.color.click();
+    await addToCartObjects.color.click();
   }
 
   async enterQuantity(qty) {
-    await AddToCartObjects.quantity.setValue(qty);
+    await addToCartObjects.quantity.setValue(qty);
   }
 
   async getSingleProductPrice() {
     const productPrice =
-      await AddToCartObjects.singleProductSalePrice.getText();
+      await addToCartObjects.singleProductSalePrice.getText();
     return productPrice;
   }
   async clickOnViewCart() {
-    await AddToCartObjects.viewCart.click();
+    await addToCartObjects.viewCart.click();
+  }
+
+  async clickOnAddToCartButton() {
+    await addToCartObjects.addToCartButton.click();
   }
 
   async addToCart(qty) {
     await this.selectProduct();
-    await this.selectSize();
     await this.selectColor();
+    await browser.pause(5000);
+    await this.selectSize();
     await this.enterQuantity(qty);
+    await browser.pause(5000);
+    await this.clickOnAddToCartButton();
     await this.clickOnViewCart();
   }
 }

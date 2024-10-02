@@ -1,10 +1,9 @@
-import CartObjects from "./cartObjects";
-
-export class CartActions {
+import { CartObjects } from "./cartObjects";
+const cartObjects = new CartObjects();
+export default class CartActions {
   async getGrandTotalAmount() {
-    const grandTotal = await CartObjects.grandTotalAmount().getText();
+    await cartObjects.grandTotalAmount.waitForDisplayed();
+    const grandTotal = await cartObjects.grandTotalAmount.getText();
     return grandTotal;
   }
 }
-
-// module.exports = new CartActions();

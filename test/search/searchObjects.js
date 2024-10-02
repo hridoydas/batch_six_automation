@@ -8,4 +8,3 @@ export class SearchObjects {
   }
 }
 
-// module.exports = new SearchObjects();

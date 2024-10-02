@@ -50,11 +50,9 @@ export const config = {
   //
   capabilities: [
     {
-      // capabilities for local browser web tests
-      browserName: "chrome", // or "firefox", "microsoftedge", "safari"
-      maxInstances: 5,
-      timeouts: {
-        pageLoad: 3000,
+      browserName: "chrome",
+      "goog:chromeOptions": {
+        args: ["--disable-extensions"],
       },
     },
   ],
@@ -66,7 +64,7 @@ export const config = {
   // Define all options that are relevant for the WebdriverIO instance here
   //
   // Level of logging verbosity: trace | debug | info | warn | error | silent
-  logLevel: "silent",
+  logLevel: "error",
   //
   // Set specific log levels per logger
   // loggers:
@@ -77,10 +75,10 @@ export const config = {
   // - @wdio/sumologic-reporter
   // - @wdio/cli, @wdio/config, @wdio/utils
   // Level of logging verbosity: trace | debug | info | warn | error | silent
-  // logLevels: {
-  //     webdriver: 'info',
-  //     '@wdio/appium-service': 'info'
-  // },
+  logLevels: {
+    webdriver: "error",
+    "@wdio/cli": "error",
+  },
   //
   // If you only want to run your tests until a specific amount of tests have failed use
   // bail (default is 0 - don't bail, run all tests).
@@ -129,7 +127,16 @@ export const config = {
   // Test reporter for stdout.
   // The only one supported by default is 'dot'
   // see also: https://webdriver.io/docs/dot-reporter
-  // reporters: ['dot'],
+  reporters: [
+    [
+      "allure",
+      {
+        outputDir: "allure-results",
+        disableWebdriverStepsReporting: false,
+        disableWebdriverScreenshotsReporting: true,
+      },
+    ],
+  ],
 
   // Options to be passed to Mocha.
   // See the full list at http://mochajs.org/
@@ -205,7 +212,7 @@ export const config = {
    */
   beforeSuite: async function (suite) {
     await browser.maximizeWindow();
-    await browser.url("/");
+    await browser.url(this.baseUrl);
   },
   /**
    * Function to be executed before a test (in Mocha/Jasmine) starts.

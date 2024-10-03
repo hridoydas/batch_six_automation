@@ -7,4 +7,3 @@ export class SearchObjects {
     return $("//input[@placeholder='Search']");
   }
 }
-

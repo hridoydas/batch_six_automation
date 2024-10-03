@@ -10,13 +10,7 @@ const utilities = new Utilities();
 
 const quantity = 2;
 
-describe("Evershop site Add product on Cart and Verify Amount", () => {
-  it("Should able to search valid product successfully", async () => {
-    await searchActions.searchProduct();
-  });
-  it("Should able to add product on cart successfully", async () => {
-    await addToCartActions.addToCart(quantity);
-  });
+describe("Evershop site Verify Amount in Cart page", () => {
   it("Should able to verify product amoutn in cart successfully", async () => {
     const getPrice = utilities.getAmountIntoNumber(
       await addToCartActions.getSingleProductPrice()

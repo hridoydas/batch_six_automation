@@ -1,4 +1,5 @@
 const verifyCart = "./test/specs/verifyCart.spec.js";
+const addToCart = "./test/specs/addToCart.spec.js";
 export const config = {
   //
   // ====================
@@ -21,7 +22,10 @@ export const config = {
   // The path of the spec files will be resolved relative from the directory of
   // of the config file unless it's absolute.
   //
-  specs: [verifyCart],
+  specs: [addToCart, verifyCart],
+  suites: {
+    addtoCartAndVerify: [[addToCart, verifyCart]],
+  },
   // Patterns to exclude.
   exclude: [
     // 'path/to/excluded/files'
@@ -79,6 +83,7 @@ export const config = {
     webdriver: "error",
     "@wdio/cli": "error",
   },
+
   //
   // If you only want to run your tests until a specific amount of tests have failed use
   // bail (default is 0 - don't bail, run all tests).
@@ -133,7 +138,7 @@ export const config = {
       {
         outputDir: "allure-results",
         disableWebdriverStepsReporting: false,
-        disableWebdriverScreenshotsReporting: true,
+        disableWebdriverScreenshotsReporting: false,
       },
     ],
   ],
@@ -241,8 +246,20 @@ export const config = {
    * @param {boolean} result.passed    true if test has passed, otherwise false
    * @param {object}  result.retries   information about spec related retries, e.g. `{ attempts: 0, limit: 0 }`
    */
-  // afterTest: function(test, context, { error, result, duration, passed, retries }) {
-  // },
+  afterTest: async function (
+    test,
+    context,
+    { error, result, duration, passed, retries }
+  ) {
+    if (error) {
+      const screenshot = await browser.takeScreenshot();
+      allure.addAttachment(
+        "Screenshot",
+        Buffer.from(screenshot, "base64"),
+        "failure/png"
+      );
+    }
+  },
 
   /**
    * Hook that gets executed after the suite has ended
